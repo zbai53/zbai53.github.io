@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zhihao Bai · Software Engineer</title>
+<meta name="description" content="Backend Software Engineer based in London, Ontario. MEng Software Engineering at Western University. Open to full-time roles in Canada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ─── DESIGN TOKENS ───────────────────────────────────────────
+   4 colors only:
+   --ink     #1a1a1a   (primary text / buttons)
+   --muted   #6b7280   (secondary text, dates)
+   --line    #e5e5e0   (borders, dividers)
+   --bg      #f9f9f7   (page background)
+   Accent: a single thin rule / underline using --ink at low opacity
+──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:   #1a1a1a;
+  --muted: #6b7280;
+  --line:  #e5e5e0;
+  --bg:    #f9f9f7;
+  --font:  'Inter', system-ui, sans-serif;
+  --serif: 'Lora', Georgia, serif;
+  --max:   820px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 54px; padding: 0 clamp(1.5rem, 5vw, 3rem);
+  background: rgba(249,249,247,0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.logo {
+  font-family: var(--serif); font-size: 1.05rem; font-weight: 600;
+  color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
+}
+.nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: 0.82rem; color: var(--muted); text-decoration: none;
+  letter-spacing: 0.03em; transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  font-size: 0.82rem !important; color: var(--bg) !important;
+  background: var(--ink); padding: 0.32rem 0.95rem;
+  border-radius: 5px; transition: opacity 0.15s !important;
+}
+.nav-cta:hover { opacity: 0.72 !important; }
+
+/* ── SHARED ── */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3rem); }
+section { padding: 5.5rem 0; border-top: 1px solid var(--line); }
+.eyebrow {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--muted); font-weight: 500; margin-bottom: 0.45rem;
+}
+h2 {
+  font-family: var(--serif); font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-weight: 600; letter-spacing: -0.02em; line-height: 1.15;
+  color: var(--ink); margin-bottom: 2.2rem;
+}
+.divider { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding-top: 54px; border-top: none;
+}
+.hero-inner {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  display: grid; grid-template-columns: 1fr 160px;
+  gap: 4rem; align-items: center; width: 100%;
+}
+.hero-pre {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--muted); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-pre::before { content: ''; display: block; width: 22px; height: 1px; background: var(--muted); }
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  font-weight: 600; letter-spacing: -0.03em; line-height: 1.06;
+  color: var(--ink); margin-bottom: 1.3rem;
+}
+h1 span { font-style: italic; font-weight: 400; color: var(--muted); }
+.hero-sub {
+  font-size: 0.97rem; color: var(--muted); line-height: 1.85;
+  font-weight: 300; max-width: 430px; margin-bottom: 2rem;
+}
+.btn-group { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  text-decoration: none; border-radius: 6px;
+  font-size: 0.85rem; font-weight: 500;
+  padding: 0.55rem 1.2rem; border: 1px solid transparent;
+  transition: all 0.18s; font-family: var(--font); cursor: pointer;
+}
+.btn-solid { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn-solid:hover { opacity: 0.78; }
+.btn-outline { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-outline:hover { border-color: #aaa; }
+.hero-nums {
+  display: flex; gap: 2rem; margin-top: 2.8rem;
+  padding-top: 2.5rem; border-top: 1px solid var(--line);
+}
+.num-n {
+  font-family: var(--serif); font-size: 1.85rem; font-weight: 600;
+  letter-spacing: -0.03em; line-height: 1;
+}
+.num-l {
+  font-size: 0.7rem; color: var(--muted); text-transform: uppercase;
+  letter-spacing: 0.09em; margin-top: 3px;
+}
+/* Avatar */
+.hero-avatar { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; }
+.avatar-circle {
+  width: 120px; height: 120px; border-radius: 50%;
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+}
+.avatar-initials {
+  font-family: var(--serif); font-size: 2rem; font-weight: 600;
+  color: var(--ink); letter-spacing: -0.04em;
+}
+.open-tag {
+  font-size: 0.72rem; font-weight: 500;
+  color: var(--ink); background: transparent;
+  border: 1px solid var(--line);
+  padding: 0.26rem 0.75rem; border-radius: 100px;
+  display: flex; align-items: center; gap: 5px; white-space: nowrap;
+}
+.open-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--ink); animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; }
+.about-p {
+  font-size: 0.94rem; color: var(--muted); font-weight: 300;
+  line-height: 1.9; margin-bottom: 0.9rem;
+}
+.about-p strong { color: var(--ink); font-weight: 500; }
+.info-list { display: flex; flex-direction: column; gap: 0.7rem; }
+.info-row {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  padding: 0.8rem 1rem; border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.info-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 2px; }
+.info-title { font-size: 0.84rem; font-weight: 500; color: var(--ink); margin-bottom: 1px; }
+.info-sub { font-size: 0.76rem; color: var(--muted); line-height: 1.5; }
+
+/* ── SKILLS ── */
+.skill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.skill-block {
+  border: 1px solid var(--line); border-radius: 10px; padding: 1.2rem 1.3rem;
+  transition: border-color 0.2s;
+}
+.skill-block:hover { border-color: #bbb; }
+.sb-head {
+  font-size: 0.82rem; font-weight: 500; color: var(--ink);
+  margin-bottom: 0.9rem; padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 7px;
+}
+.sb-icon { font-size: 0.9rem; }
+.sb-list { list-style: none; display: flex; flex-direction: column; gap: 0.38rem; }
+.sb-list li {
+  font-size: 0.8rem; color: var(--muted); font-weight: 300;
+  padding-left: 0.9rem; position: relative;
+}
+.sb-list li::before {
+  content: '–'; position: absolute; left: 0; color: var(--line);
+}
+.cert-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.8rem; }
+.cert {
+  font-size: 0.74rem; color: var(--muted); border: 1px solid var(--line);
+  padding: 0.22rem 0.75rem; border-radius: 100px;
+}
+
+/* ── PROJECTS ── */
+.proj-list { display: flex; flex-direction: column; }
+.proj {
+  display: grid; grid-template-columns: 44px 1fr auto;
+  gap: 0 1.3rem; align-items: start;
+  padding: 1.5rem 0; border-bottom: 1px solid var(--line);
+}
+.proj:first-child { border-top: 1px solid var(--line); }
+.proj-idx {
+  font-family: var(--serif); font-size: 0.76rem; font-weight: 400;
+  color: var(--line); padding-top: 2px; font-style: italic;
+  user-select: none;
+}
+.proj-tag {
+  display: inline-block; font-size: 0.66rem; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  border: 1px solid var(--line); color: var(--muted);
+  padding: 1px 7px; border-radius: 3px; margin-left: 0.6rem;
+  vertical-align: middle; white-space: nowrap;
+}
+.proj-title {
+  font-size: 0.95rem; font-weight: 500; color: var(--ink);
+  margin-bottom: 0.3rem; line-height: 1.4;
+}
+.proj-desc {
+  font-size: 0.84rem; color: var(--muted); font-weight: 300;
+  line-height: 1.75; margin-bottom: 0.65rem;
+}
+.proj-highlight {
+  font-size: 0.78rem; color: var(--ink); font-weight: 500;
+  margin-bottom: 0.65rem; opacity: 0.75;
+}
+.proj-highlight::before { content: '▸ '; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag {
+  font-size: 0.69rem; color: var(--muted); border: 1px solid var(--line);
+  padding: 1px 7px; border-radius: 3px;
+}
+.proj-gh {
+  font-size: 0.76rem; color: var(--muted); text-decoration: none;
+  white-space: nowrap; padding-top: 3px;
+  transition: color 0.15s; display: inline-flex; align-items: center; gap: 3px;
+}
+.proj-gh:hover { color: var(--ink); }
+
+/* ── EXPERIENCE ── */
+.exp-list { display: flex; flex-direction: column; }
+.exp {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 0 2rem; padding: 1.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.exp:first-child { border-top: 1px solid var(--line); }
+.exp-date { font-size: 0.75rem; color: var(--muted); font-weight: 300; padding-top: 2px; line-height: 1.5; }
+.exp-role { font-size: 0.95rem; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+.exp-org { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.6rem; font-weight: 300; }
+.exp-org em { font-style: normal; color: var(--ink); font-weight: 400; }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.exp-bullets li {
+  font-size: 0.83rem; color: var(--muted); font-weight: 300;
+  line-height: 1.7; padding-left: 1rem; position: relative;
+}
+.exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--line); }
+
+/* ── AWARDS ── */
+.awards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+.award {
+  display: flex; align-items: flex-start; gap: 0.7rem;
+  padding: 0.8rem 1rem; border: 1px solid var(--line); border-radius: 8px;
+}
+.award-icon { font-size: 0.85rem; flex-shrink: 0; margin-top: 1px; }
+.award-title { font-size: 0.83rem; font-weight: 500; color: var(--ink); margin-bottom: 1px; }
+.award-sub { font-size: 0.74rem; color: var(--muted); }
+
+/* ── CONTACT ── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.contact-intro { font-size: 0.94rem; color: var(--muted); font-weight: 300; line-height: 1.9; margin-bottom: 1.8rem; }
+.ch-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.ch {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.78rem 0.95rem; border: 1px solid var(--line);
+  border-radius: 8px; text-decoration: none; transition: border-color 0.15s;
+}
+.ch:hover { border-color: #aaa; }
+.ch-icon { font-size: 0.9rem; flex-shrink: 0; }
+.ch-title { font-size: 0.83rem; font-weight: 500; color: var(--ink); }
+.ch-val { font-size: 0.74rem; color: var(--muted); margin-top: 1px; }
+
+/* Form */
+.form { display: flex; flex-direction: column; gap: 0.85rem; }
+.f2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+.ff { display: flex; flex-direction: column; gap: 4px; }
+.fl { font-size: 0.69rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.fi, .fa {
+  background: white; border: 1px solid var(--line); color: var(--ink);
+  padding: 0.58rem 0.85rem; border-radius: 7px;
+  font-family: var(--font); font-size: 0.87rem;
+  outline: none; transition: border-color 0.15s; resize: none;
+}
+.fi:focus, .fa:focus { border-color: #999; }
+.fi::placeholder, .fa::placeholder { color: var(--line); }
+.fsub {
+  background: var(--ink); color: var(--bg); border: none;
+  padding: 0.58rem 1.4rem; border-radius: 7px;
+  font-family: var(--font); font-size: 0.85rem; font-weight: 500;
+  cursor: pointer; transition: opacity 0.15s; align-self: flex-start;
+}
+.fsub:hover { opacity: 0.75; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--line); padding: 1.6rem clamp(1.5rem, 5vw, 3rem);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.75rem; color: var(--muted);
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--ink); }
+.fl-links { display: flex; gap: 1.2rem; }
+
+/* ── REVEAL ── */
+.r { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.r.in { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-avatar { display: none; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .skill-grid { grid-template-columns: 1fr 1fr; }
+  .exp { grid-template-columns: 1fr; }
+  .exp-date { margin-bottom: 0.25rem; }
+  .proj { grid-template-columns: 36px 1fr; }
+  .proj-gh { display: none; }
+  .awards-grid { grid-template-columns: 1fr; }
+  .f2 { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  footer { flex-direction: column; gap: 0.6rem; text-align: center; }
+}
+@media (max-width: 480px) {
+  .skill-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Zhihao Bai</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section style="padding:0;border-top:none">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="r">
+        <div class="hero-pre">London, Ontario · Open to Full-Time</div>
+        <h1>Software<br>Engineer<br><span>&amp; Researcher</span></h1>
+        <p class="hero-sub">
+          MEng student at Western University. Experienced in backend APIs,
+          cloud-native deployment, and ML systems. Passionate about
+          building reliable, well-tested software at scale.
+        </p>
+        <div class="btn-group">
+          <a href="#projects" class="btn btn-solid">View Projects</a>
+          <a href="resume.pdf" class="btn btn-outline" target="_blank">Download Résumé ↓</a>
+        </div>
+        <div class="hero-nums">
+          <div><div class="num-n">5+</div><div class="num-l">Years Coding</div></div>
+          <div><div class="num-n">2</div><div class="num-l">Publications</div></div>
+          <div><div class="num-n">10+</div><div class="num-l">Awards</div></div>
+        </div>
+      </div>
+      <div class="hero-avatar r">
+        <div class="avatar-circle">
+          <span class="avatar-initials">ZB</span>
+        </div>
+        <div class="open-tag"><span class="open-dot"></span>Available 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h2>Background</h2>
+    <div class="about-grid r">
+      <div>
+        <p class="about-p">
+          I'm a software engineer completing my <strong>Master of Engineering in Software Engineering</strong>
+          at Western University (expected Dec 2025). My work spans backend API development,
+          cloud infrastructure, and applied ML — with a strong emphasis on shipping production-quality code.
+        </p>
+        <p class="about-p">
+          At <strong>Vosyn</strong> I build Python-based microservice APIs and contribute to CI/CD pipelines.
+          Before that, I worked at <strong>Robarts Research Institute</strong> where I implemented and benchmarked
+          deep learning models (U-Net, SAM2, nnU-Net) for medical image segmentation,
+          publishing results at SPIE.
+        </p>
+        <p class="about-p">
+          My undergraduate research at Zhengzhou University led to awards at national competitions
+          and a second publication in robotics and AI-assisted rehabilitation. I enjoy problems that sit
+          at the intersection of <strong>engineering rigour and real-world impact</strong>.
+        </p>
+      </div>
+      <div class="info-list">
+        <div class="info-row">
+          <span class="info-icon">🎓</span>
+          <div>
+            <div class="info-title">Western University</div>
+            <div class="info-sub">MEng Software Engineering · Expected Dec 2025<br>London, Ontario, Canada</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-icon">🎓</span>
+          <div>
+            <div class="info-title">Zhengzhou University of Light Industry</div>
+            <div class="info-sub">BEng Software Engineering · Jun 2024<br>National Scholarship · Top 0.2%</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-icon">🏢</span>
+          <div>
+            <div class="info-title">Currently: Vosyn (Toronto)</div>
+            <div class="info-sub">Backend Software Engineer Intern · Sep 2025 – Present</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-icon">📍</span>
+          <div>
+            <div class="info-title">London, ON · Canada</div>
+            <div class="info-sub">Open to on-site / hybrid / remote<br>PR / eligible to work in Canada</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-icon">📄</span>
+          <div>
+            <div class="info-title">Publications</div>
+            <div class="info-sub">
+              SPIE — "Comparison of Deep Learning Methods for Segmentation of Kidney Structures in 2D Ultrasound"<br>
+              ACE Vol. 10 — "Local Minimum Enhanced Artificial Potential Field Method"
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">Skills</div>
+    <h2>Technical Stack</h2>
+    <div class="skill-grid r">
+
+      <div class="skill-block">
+        <div class="sb-head"><span class="sb-icon">🖥️</span>Backend &amp; APIs</div>
+        <ul class="sb-list">
+          <li>Java · Spring Boot</li>
+          <li>Python · Django · Flask · FastAPI</li>
+          <li>Node.js · Express</li>
+          <li>RESTful API design</li>
+          <li>Microservice architecture</li>
+        </ul>
+      </div>
+
+      <div class="skill-block">
+        <div class="sb-head"><span class="sb-icon">☁️</span>Cloud &amp; DevOps</div>
+        <ul class="sb-list">
+          <li>Google Cloud Platform (GKE)</li>
+          <li>Docker · Kubernetes · YAML</li>
+          <li>CI/CD pipelines</li>
+          <li>Firebase Auth · Cloud SQL</li>
+          <li>Cloud Load Balancer</li>
+        </ul>
+      </div>
+
+      <div class="skill-block">
+        <div class="sb-head"><span class="sb-icon">🗄️</span>Databases</div>
+        <ul class="sb-list">
+          <li>PostgreSQL · MySQL · SQL</li>
+          <li>MongoDB</li>
+          <li>Firebase Firestore</li>
+          <li>Database design &amp; optimization</li>
+        </ul>
+      </div>
+
+      <div class="skill-block">
+        <div class="sb-head"><span class="sb-icon">🧠</span>ML &amp; Research</div>
+        <ul class="sb-list">
+          <li>PyTorch · scikit-learn</li>
+          <li>U-Net · SAM2 · nnU-Net</li>
+          <li>Medical image segmentation</li>
+          <li>EEG signal classification (~90% acc.)</li>
+          <li>Mediapipe pose recognition</li>
+        </ul>
+      </div>
+
+      <div class="skill-block">
+        <div class="sb-head"><span class="sb-icon">🌐</span>Frontend</div>
+        <ul class="sb-list">
+          <li>React · TypeScript · JavaScript</li>
+          <li>Responsive UI design</li>
+          <li>Google / Microsoft OAuth</li>
+          <li>PyQt (desktop interfaces)</li>
+        </ul>
+      </div>
+
+      <div class="skill-block">
+        <div class="sb-head"><span class="sb-icon">🔧</span>Tools &amp; Practices</div>
+        <ul class="sb-list">
+          <li>Git · GitHub</li>
+          <li>API validation &amp; regression testing</li>
+          <li>Agile / OKR-based planning</li>
+          <li>Embedded systems (Jetson Nano)</li>
+          <li>Technical writing &amp; documentation</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="cert-row r">
+      <span class="cert">Java</span>
+      <span class="cert">Python</span>
+      <span class="cert">TypeScript</span>
+      <span class="cert">JavaScript</span>
+      <span class="cert">SQL</span>
+      <span class="cert">Spring Boot</span>
+      <span class="cert">React</span>
+      <span class="cert">Node.js</span>
+      <span class="cert">Docker</span>
+      <span class="cert">Kubernetes</span>
+      <span class="cert">GCP</span>
+      <span class="cert">PostgreSQL</span>
+      <span class="cert">MongoDB</span>
+      <span class="cert">PyTorch</span>
+      <span class="cert">Mediapipe</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">Projects</div>
+    <h2>Selected Work</h2>
+    <div class="proj-list r">
+
+      <div class="proj">
+        <div class="proj-idx">01</div>
+        <div>
+          <div class="proj-title">
+            Cloud-Based Social Media App
+            <span class="proj-tag">Cloud · Full-Stack</span>
+          </div>
+          <p class="proj-desc">
+            Full-stack social platform (sign-up, posts, comments, likes, profiles) with React frontend
+            and Node.js + Express backend. Deployed on GCP using GKE with Kubernetes YAML configs,
+            two web server pods behind a Cloud Load Balancer, and a dedicated database pod.
+            Firebase Auth for authentication, Cloud SQL for persistent storage.
+          </p>
+          <div class="proj-highlight">Horizontally scalable deployment on GKE with high availability config</div>
+          <div class="tag-row">
+            <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span>
+            <span class="tag">PostgreSQL</span><span class="tag">GCP / GKE</span>
+            <span class="tag">Kubernetes</span><span class="tag">Firebase Auth</span>
+          </div>
+        </div>
+        <a href="#" class="proj-gh">GitHub →</a>
+      </div>
+
+      <div class="proj">
+        <div class="proj-idx">02</div>
+        <div>
+          <div class="proj-title">
+            React E-Commerce Platform
+            <span class="proj-tag">Backend · Full-Stack</span>
+          </div>
+          <p class="proj-desc">
+            Amazon-style shopping application with product catalog, cart, checkout, order tracking,
+            and inventory management. MVC backend built with Node.js, Express, and MongoDB.
+            Separate user and admin roles; third-party OAuth via Google and Microsoft.
+          </p>
+          <div class="proj-highlight">Full purchase flow with payment integration, inventory alerts, and admin dashboard</div>
+          <div class="tag-row">
+            <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span>
+            <span class="tag">MongoDB</span><span class="tag">Google OAuth</span><span class="tag">MVC</span>
+          </div>
+        </div>
+        <a href="#" class="proj-gh">GitHub →</a>
+      </div>
+
+      <div class="proj">
+        <div class="proj-idx">03</div>
+        <div>
+          <div class="proj-title">
+            Kidney Ultrasound Segmentation (Research)
+            <span class="proj-tag">ML · Research</span>
+          </div>
+          <p class="proj-desc">
+            Implemented U-Net for kidney structure segmentation in 2D ultrasound images at Robarts Research Institute.
+            Synthesized training data from CT/MRI using the MUSiK algorithm, applied preprocessing and augmentation,
+            and benchmarked against SAM2, MedSAM2, and nnU-Net using Dice, HD, and ASSD metrics.
+          </p>
+          <div class="proj-highlight">+12% Dice score improvement over baseline · Published at SPIE</div>
+          <div class="tag-row">
+            <span class="tag">PyTorch</span><span class="tag">U-Net</span><span class="tag">SAM2</span>
+            <span class="tag">nnU-Net</span><span class="tag">MUSiK</span><span class="tag">Medical Imaging</span>
+          </div>
+        </div>
+        <a href="#" class="proj-gh">Paper →</a>
+      </div>
+
+      <div class="proj">
+        <div class="proj-idx">04</div>
+        <div>
+          <div class="proj-title">
+            VR Stroke Rehabilitation System
+            <span class="proj-tag">ML · Embedded</span>
+          </div>
+          <p class="proj-desc">
+            Led a 6-member team to build a VR-based motor imagery rehabilitation system.
+            Developed an EEG signal classification algorithm to detect patient intentions and
+            transmit control signals to VR glasses. Managed OKR planning, module assignment,
+            and cross-discipline coordination across the full project lifecycle.
+          </p>
+          <div class="proj-highlight">~90% EEG classification accuracy · National award recipient</div>
+          <div class="tag-row">
+            <span class="tag">Python</span><span class="tag">EEG Classification</span>
+            <span class="tag">VR</span><span class="tag">Signal Processing</span><span class="tag">Team Lead</span>
+          </div>
+        </div>
+        <a href="#" class="proj-gh">Details →</a>
+      </div>
+
+      <div class="proj">
+        <div class="proj-idx">05</div>
+        <div>
+          <div class="proj-title">
+            Real-Time Pose Recognition for Stroke Rehab
+            <span class="proj-tag">ML · Edge</span>
+          </div>
+          <p class="proj-desc">
+            Deployed Mediapipe-based pose recognition on Jetson Nano for upper-limb rehabilitation assessment.
+            Generated 5,000+ labeled frames for deep learning training, developed an acoustic simulation
+            algorithm improving motion recognition by ~10%, and built a PyQt interface for clinical use.
+          </p>
+          <div class="proj-highlight">25 FPS real-time inference · &lt;150ms latency on Jetson Nano · 30% reduction in manual test time</div>
+          <div class="tag-row">
+            <span class="tag">Python</span><span class="tag">Mediapipe</span><span class="tag">Jetson Nano</span>
+            <span class="tag">PyQt</span><span class="tag">Edge Deployment</span>
+          </div>
+        </div>
+        <a href="#" class="proj-gh">Details →</a>
+      </div>
+
+      <div class="proj">
+        <div class="proj-idx">06</div>
+        <div>
+          <div class="proj-title">
+            IoT Exoskeleton Rehabilitation System
+            <span class="proj-tag">Backend · IoT</span>
+          </div>
+          <p class="proj-desc">
+            Built data transmission between upper and lower computers using Python, mapping real-time
+            sensor data from MPU6050 (thigh angle &amp; acceleration). Constructed a Spring Boot web
+            application with database integration to display live device and sensor data.
+          </p>
+          <div class="proj-highlight">50+ concurrent users · &lt;200ms query latency · Huawei Cup 2nd Prize</div>
+          <div class="tag-row">
+            <span class="tag">Spring Boot</span><span class="tag">Python</span>
+            <span class="tag">MPU6050</span><span class="tag">IoT</span><span class="tag">SQL</span>
+          </div>
+        </div>
+        <a href="#" class="proj-gh">Details →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">Experience</div>
+    <h2>Work History</h2>
+    <div class="exp-list r">
+
+      <div class="exp">
+        <div class="exp-date">Sep 2025 – Present</div>
+        <div>
+          <div class="exp-role">Backend Software Engineer Intern</div>
+          <div class="exp-org"><em>Vosyn</em> · Toronto, ON · Full-time</div>
+          <ul class="exp-bullets">
+            <li>Developing and integrating Python-based backend APIs across multiple services in a microservice environment.</li>
+            <li>Built API validation and regression checks to improve backend reliability and support faster iteration cycles.</li>
+            <li>Collaborated with frontend engineers to align API contracts and debug TypeScript–backend integration issues.</li>
+            <li>Supported CI/CD workflows by integrating automated backend checks into deployment pipelines.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp">
+        <div class="exp-date">Mar – Sep 2025</div>
+        <div>
+          <div class="exp-role">Software Engineer Intern (ML Research)</div>
+          <div class="exp-org"><em>Robarts Research Institute</em> · London, ON · Full-time</div>
+          <ul class="exp-bullets">
+            <li>Synthesized ultrasound training data from CT/MRI using the MUSiK algorithm with segmentation and simulation modeling.</li>
+            <li>Implemented U-Net for kidney ultrasound segmentation; designed and tuned loss functions for a 12% Dice score improvement.</li>
+            <li>Benchmarked U-Net against SAM2, MedSAM2, and nnU-Net; results published at SPIE.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp">
+        <div class="exp-date">Feb – May 2024</div>
+        <div>
+          <div class="exp-role">Algorithm Engineer Intern</div>
+          <div class="exp-org"><em>Zhongjia Intellectual Property Services Group</em> · Zhengzhou, China</div>
+          <ul class="exp-bullets">
+            <li>Designed patentable technology solutions and proposed innovations in implementation and process optimization.</li>
+            <li>Applied image processing to patent innovations in IBD granuloma identification and copper-aluminum welding QA.</li>
+            <li>Streamlined workflow between algorithm design and patent drafting, reducing cross-team communication time by 15%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp">
+        <div class="exp-date">Oct 2023 – Jan 2024</div>
+        <div>
+          <div class="exp-role">Software Engineer Intern</div>
+          <div class="exp-org"><em>SF Diamond Co., Ltd</em> · Zhengzhou, China</div>
+          <ul class="exp-bullets">
+            <li>Performed system and database testing through debugging, issue analysis, and test documentation.</li>
+            <li>Cleaned and labeled datasets using data processing tools, ensuring quality for downstream analysis.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp">
+        <div class="exp-date">Nov 2020 – Jul 2023</div>
+        <div>
+          <div class="exp-role">Software Developer &amp; Project Manager</div>
+          <div class="exp-org"><em>Zhengzhou University of Light Industry</em> · Research Lab</div>
+          <ul class="exp-bullets">
+            <li>Led and coordinated 6-member interdisciplinary team across VR rehabilitation, pose recognition, and IoT exoskeleton projects.</li>
+            <li>Oversaw algorithm design and hardware integration (EEG, Mediapipe, embedded systems).</li>
+            <li>Achieved 10+ national/provincial awards including Huawei Cup IoT (2nd Prize) and Fourier Cup Innorehab (1st Prize).</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="wrap">
+    <div class="eyebrow">Recognition</div>
+    <h2>Awards &amp; Honours</h2>
+    <div class="awards-grid r">
+      <div class="award">
+        <span class="award-icon">🥇</span>
+        <div>
+          <div class="award-title">National Scholarship</div>
+          <div class="award-sub">Top 0.2% nationally · China Ministry of Education</div>
+        </div>
+      </div>
+      <div class="award">
+        <span class="award-icon">🏆</span>
+        <div>
+          <div class="award-title">1st Prize · Fourier Cup Innorehab 2021</div>
+          <div class="award-sub">Medical robotics innovation · National level</div>
+        </div>
+      </div>
+      <div class="award">
+        <span class="award-icon">🥈</span>
+        <div>
+          <div class="award-title">2nd Prize · Huawei Cup IoT Competition</div>
+          <div class="award-sub">Outstanding Team Award · National level</div>
+        </div>
+      </div>
+      <div class="award">
+        <span class="award-icon">🌟</span>
+        <div>
+          <div class="award-title">Outstanding Work · China IOT Innovation</div>
+          <div class="award-sub">China International IoT Innovation Competition, 2021</div>
+        </div>
+      </div>
+      <div class="award">
+        <span class="award-icon">🥉</span>
+        <div>
+          <div class="award-title">3rd Prize · iCAN Innovation Competition</div>
+          <div class="award-sub">16th iCAN · National level</div>
+        </div>
+      </div>
+      <div class="award">
+        <span class="award-icon">🎓</span>
+        <div>
+          <div class="award-title">Provincial Outstanding Graduate</div>
+          <div class="award-sub">Henan Province · Class of 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h2>Let's Connect</h2>
+    <div class="contact-grid r">
+      <div>
+        <p class="contact-intro">
+          I'm actively looking for full-time software engineering roles in Canada — backend, ML engineering,
+          cloud/DevOps, data engineering, or QA. If you have an opening or want to connect, I typically
+          reply within one business day.
+        </p>
+        <div class="ch-list">
+          <a href="mailto:zbai53@uwo.ca" class="ch">
+            <span class="ch-icon">✉️</span>
+            <div><div class="ch-title">Email</div><div class="ch-val">zbai53@uwo.ca</div></div>
+          </a>
+          <a href="tel:4165407037" class="ch">
+            <span class="ch-icon">📱</span>
+            <div><div class="ch-title">Phone</div><div class="ch-val">(416) 540-7037</div></div>
+          </a>
+          <a href="https://www.linkedin.com/in/zhihao-bai-a59603369" target="_blank" class="ch">
+            <span class="ch-icon">💼</span>
+            <div><div class="ch-title">LinkedIn</div><div class="ch-val">linkedin.com/in/zhihao-bai-a59603369</div></div>
+          </a>
+          <a href="https://github.com/" target="_blank" class="ch">
+            <span class="ch-icon">🐙</span>
+            <div><div class="ch-title">GitHub</div><div class="ch-val">github.com/yourhandle</div></div>
+          </a>
+        </div>
+      </div>
+      <form class="form" onsubmit="doSend(event)">
+        <div class="f2">
+          <div class="ff"><label class="fl">Name</label><input class="fi" type="text" placeholder="Your name"></div>
+          <div class="ff"><label class="fl">Email</label><input class="fi" type="email" placeholder="you@example.com"></div>
+        </div>
+        <div class="ff"><label class="fl">Subject</label><input class="fi" type="text" placeholder="Job opportunity · Collaboration · Other"></div>
+        <div class="ff"><label class="fl">Message</label><textarea class="fa" rows="5" placeholder="Tell me what you have in mind…"></textarea></div>
+        <button type="submit" class="fsub" id="sb">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Zhihao Bai · London, ON</span>
+  <div class="fl-links">
+    <a href="https://www.linkedin.com/in/zhihao-bai-a59603369" target="_blank">LinkedIn</a>
+    <a href="https://github.com/" target="_blank">GitHub</a>
+    <a href="resume.pdf" target="_blank">Résumé</a>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.07 });
+document.querySelectorAll('.r').forEach(el => io.observe(el));
+
+function doSend(e) {
+  e.preventDefault();
+  const b = document.getElementById('sb');
+  b.textContent = 'Sent ✓'; b.style.background = '#374151';
+  setTimeout(() => { b.textContent = 'Send Message'; b.style.background = ''; }, 3000);
+}
+</script>
+</body>
+</html>
